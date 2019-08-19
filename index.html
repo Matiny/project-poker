@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="poker.css">
+    <title>Mahjong Poker | By Matiny</title>
+</head>
+
+<body>
+    <main>
+        <section class="splash">
+            <div class="bet-box">
+                <div class="box-wrapper">
+                    <p>Enter a bet from 100 to 10,000.</p>
+                    <p>If not, a random number will be chosen for you.</p>
+                    <input type="number" id="betAmount" placeholder="Enter amount: 100 - 10,000">
+                    <button id="setBet">CONFIRM BET!</button>
+                </div>
+            </div>
+        </section>
+        <section class="round-overlay"></section>
+
+        <section class="info">
+            <div class="info-box"></div>
+            <!-- <img src="images/head.png" alt="" class="dragoness"> -->
+        </section>
+        
+        <section class="info-bar">
+            <div class="opponent hand">
+                <div class="central">
+                    <p class="label">THEIR COMBO:</p>
+                    <p class="combo"></p>
+                </div>
+            </div>
+            <div class="game">
+                <div class="game-info">
+                    <p class="round">Round 1 of 3</p>
+                    <p class="label">CURRENT BET</p>
+                    <p class="amount">$----</p>
+                </div>
+                <img src="images/game-image.png" alt="" class="game-image">
+            </div>
+            <div class="player hand">
+                <div class="central">
+                    <p class="label">YOUR COMBO:</p>
+                    <p class="combo"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="play-area">
+            <div class="opponent-row"></div>
+            <div class="hand-row"></div>
+            <div class="next-round">
+                <img src="images/next-round.png" alt="">
+            </div>
+            <div class="end-game">
+                <img src="images/end-game.png" alt="">
+            </div>
+        </section>
+    </main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="poker.js"></script>
+</body>
+
+</html>

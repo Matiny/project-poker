@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+body {
+  background: url(images/bg.jpg) no-repeat center center fixed;
+  color: white;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.splash {
+  background: url(images/splash.jpg) no-repeat center center fixed;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 5;
+}
+
+.splash .bet-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: Arial;
+  font-size: 1.25vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 33%;
+  height: 33%;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -90%);
+          transform: translate(-50%, -90%);
+}
+
+.splash .bet-box #betAmount {
+  font-size: 1vw;
+  padding: 2.5%;
+  width: 75%;
+  margin: 5% 0;
+}
+
+.splash .bet-box #setBet {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1vw;
+  display: block;
+  margin: 0 auto;
+  border: none;
+  padding: 3%;
+  background-color: #ffebc3;
+}
+
+.round-overlay {
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  z-index: 6;
+  background-color: rgba(255, 255, 255, 0.95);
+  height: 100%;
+  width: 100%;
+  color: black;
+  font-family: "Montserrat";
+  font-size: 2vw;
+}
+
+.info-bar {
+  margin-left: 5%;
+  height: 100vh;
+  width: 22.5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.hand {
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 15%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.game {
+  width: 100%;
+  position: relative;
+}
+
+.game .game-info {
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.game .game-info .amount {
+  font-size: 2.5vw;
+  font-family: Montserrat;
+}
+
+.game-image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.round {
+  margin-bottom: 10%;
+}
+
+.round, .combo {
+  font-family: Montserrat;
+  font-size: 1.5vw;
+}
+
+.label {
+  font-family: Arial;
+  font-size: 1.25vw;
+}
+
+.play-area {
+  width: 77.5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 3% 0;
+  position: relative;
+}
+
+.hand-row img {
+  width: 100%;
+  padding: 0 1%;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform .25s ease-in;
+  transition: -webkit-transform .25s ease-in;
+  transition: transform .25s ease-in;
+  transition: transform .25s ease-in, -webkit-transform .25s ease-in;
+}
+
+.hand-row img:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.opponent-row img {
+  width: 100%;
+}
+
+#card-wrapper {
+  display: inline-block;
+  width: 10%;
+  margin: 0 1%;
+  position: relative;
+  -webkit-transition: all .33s ease-out;
+  transition: all .33s ease-out;
+}
+
+.next-round, .end-game {
+  cursor: pointer;
+  position: absolute;
+  width: 15%;
+  top: 50%;
+  left: 95%;
+  -webkit-transform: translate(-95%, -50%);
+          transform: translate(-95%, -50%);
+}
+
+.next-round img, .end-game img {
+  width: 100%;
+}
+
+.end-game {
+  display: none;
+}
+
+.selected {
+  -webkit-transform: translateY(-85%);
+          transform: translateY(-85%);
+  opacity: 0.66;
+}
+
+.ai-selected {
+  -webkit-transform: translateY(85%);
+          transform: translateY(85%);
+  opacity: 0.66;
+}
+
+#replay {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 2vw;
+  display: block;
+  margin: 5% auto;
+  border: none;
+  padding: 3.5%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+/*# sourceMappingURL=poker.css.map */
