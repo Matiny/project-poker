@@ -47,10 +47,31 @@ class Player {
             if (c === 2) pairs++;
         });
 
-        let keys = Object.keys(count);
-        // console.log(keys);
+        if (this.hand.find((card) => card === 6)) combo = { name: "HIGH CARD", value: 1 };
+        if (pairs === 1) combo = { name: "ONE PAIR", value: 2 };
+        if (pairs === 2) combo = { name: "TWO PAIRS", value: 3 };
+        if (three) combo = { name: "THREE OF A KIND", value: 4 };
+        if (four) combo = { name: "FOUR OF A KIND", value: 7 };
+        if (five) combo = { name: "FIVE OF A KIND", value: 8 };
+        if (pairs === 1 && three) combo = { name: "FULL HOUSE", value: 6 };
 
-        if (whichPlayer === ".opponent") {
+         /* We add in sort since the hand can be in any order.
+        We also add in dummyhand since the sort function can cause unwanted results with this.hand when rendered. */
+
+        let dummyhand = [...this.hand];
+
+        if (dummyhand.sort((a, b) => a - b).join("") === "12345" || dummyhand.sort((a, b) => a - b).join("") === "23456") combo = { name: "STRAIGHT", value: 5 };
+
+        $(`${whichPlayer} .combo`).text(combo.name);
+        this.score = combo.value;
+
+        /* Opponent AI goes here! */
+
+        let keys = Object.keys(count);
+
+        //This first condition excludes Full House and Straight
+
+        if (whichPlayer === ".opponent" && combo.value !== 5 && combo.value !== 6) {
             keys.forEach(numberKey => {
                 if (count[numberKey] === 1 && round < 3) {
                     //Grab the card by alt and extract the card class name by number
@@ -60,21 +81,30 @@ class Player {
             });
         }
 
-        if (this.hand.find((card) => card === 6)) combo = { name: "HIGH CARD", value: 1 };
-        if (pairs === 1) combo = { name: "ONE PAIR", value: 2 };
-        if (pairs === 2) combo = { name: "TWO PAIRS", value: 3 };
-        if (three) combo = { name: "THREE OF A KIND", value: 4 };
-        if (four) combo = { name: "FOUR OF A KIND", value: 7 };
-        if (five) combo = { name: "FIVE OF A KIND", value: 8 };
-        if (pairs === 1 && three) combo = { name: "FULL HOUSE", value: 6 };
-        // We add in sort since the hand can be in any order
+        //When opponent is losing with Full House, they will drop the pair
 
-        let dummyhand = this.hand;
+        else if (whichPlayer === ".opponent" && combo.value === 6 && Opponent.score <= You.score) {
+            keys.forEach(numberKey => {
+                if (count[numberKey] === 2 && round < 3) {
+                    //Grab the card by alt and extract the card class name by number
+                    $(`.opponent-row img[alt="${numberKey} Card"]`)
+                    .parent("#card-wrapper").addClass("ai-selected");
+                }
+            });
+        }
 
-        if (dummyhand.sort((a, b) => a - b).join("") === "12345" || dummyhand.sort((a, b) => a - b).join("") === "23456") combo = { name: "STRAIGHT", value: 5 };
+         //When opponent is losing with Straight, they will drop entire hand
 
-        $(`${whichPlayer} .combo`).text(combo.name);
-        this.score = combo.value;
+         else if (whichPlayer === ".opponent" && combo.value === 5 && Opponent.score <= You.score) {
+            keys.forEach(numberKey => {
+                if (count[numberKey] === 1 && round < 3) {
+                    //Grab the card by alt and extract the card class name by number
+                    $(`.opponent-row img[alt="${numberKey} Card"]`)
+                    .parent("#card-wrapper").addClass("ai-selected");
+                }
+            });
+        }
+        
     }
 
     swapCard(whichCardIndex) {
@@ -104,10 +134,12 @@ $("#setBet").click(() => {
     showRound();
     You.setBet();
     You.firstFive();
+
     You.renderHand(".hand-row");
     You.handCombo(".player");
 
     Opponent.firstFive();
+
     // Render the hand before the handCombo, thus allowing the opponent to "decide" via AI which cards to remove
     Opponent.renderHand(".opponent-row");
     Opponent.handCombo(".opponent");
