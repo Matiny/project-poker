@@ -266,6 +266,14 @@ main {
   transition: all .5s ease-out;
 }
 
+.speech {
+  position: absolute;
+  left: 33%;
+  top: 80%;
+  -webkit-transform: translate(-33%, -80%);
+          transform: translate(-33%, -80%);
+}
+
 .info-box {
   display: none;
   width: 100%;

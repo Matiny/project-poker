@@ -107,10 +107,6 @@ class Player {
         
     }
 
-    swapCard(whichCardIndex) {
-        this.drawCard(whichCardIndex);
-    }
-
     renderHand(whichSide) {
         let cardHTML = "";
         this.hand.forEach((card, index) => {
@@ -156,7 +152,7 @@ $(".next-round").click(() => {
     if ($(".selected")) {
         $(".selected").each((index, element) => {
             let number = parseInt(element.childNodes[1].className.slice(4));
-            You.swapCard(number);
+            You.drawCard(number);
         });
         You.renderHand(".hand-row");
         You.handCombo(".player");
@@ -165,7 +161,7 @@ $(".next-round").click(() => {
     if ($(".ai-selected")) {
         $(".ai-selected").each((index, element) => {
             let number = parseInt(element.childNodes[1].className.slice(4));
-            Opponent.swapCard(number);
+            Opponent.drawCard(number);
         });
         Opponent.renderHand(".opponent-row");
         Opponent.handCombo(".opponent");
@@ -215,9 +211,11 @@ $("body").on("click", "#replay", function () {
 $(".dragoness").click(() => {
     $(".dragoness").addClass("active");
     $(".info-box").fadeIn(330);
+    $(".speech").fadeOut(330);
 })
 
 $("#close").click(() => {
     $(".dragoness").removeClass("active");
     $(".info-box").fadeOut(330);
+    $(".speech").fadeIn(330);
 })
