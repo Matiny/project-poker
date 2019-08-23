@@ -62,7 +62,7 @@ class Player {
 
         if (dummyhand.sort((a, b) => a - b).join("") === "12345" || dummyhand.sort((a, b) => a - b).join("") === "23456") combo = { name: "STRAIGHT", value: 5 };
 
-        $(`${whichPlayer} .combo`).text(combo.name);
+        $(`${whichPlayer} .combo`).text(`${combo.name} (${combo.value} Points)`);
         this.score = combo.value;
 
         /* Opponent AI goes here! */
@@ -178,6 +178,7 @@ $(".end-game").click(() => {
 
 showRound = () => {
     round++;
+    $(".round").text(`Round ${round} of 3`);
     if (round > 2) {
         $(".end-game").show();
         $(".next-round").hide();
@@ -210,3 +211,13 @@ endGame = () => {
 $("body").on("click", "#replay", function () {
     window.location.reload()
 });
+
+$(".dragoness").click(() => {
+    $(".dragoness").addClass("active");
+    $(".info-box").fadeIn(330);
+})
+
+$("#close").click(() => {
+    $(".dragoness").removeClass("active");
+    $(".info-box").fadeOut(330);
+})
